@@ -40,7 +40,7 @@ pipeline {
     stage ('Deploy to Cluster') {
             steps {
                 sh ""
-                     aws eks update-kubeconfig --region eu-west-1 --name ekscluster"
+                     aws eks update-kubeconfig --region eu-west-1 --name ekscluster
                      envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - 
                    ""
             }
