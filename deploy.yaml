@@ -1,55 +1,47 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: agency-banking-staging
+  name: cons-deploy
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arca-agency-transaction-service
-  namespace: agency-banking-staging
+  name: awsprime
+  namespace: cons-deploy
 spec:
   selector:
     matchLabels:
-      app: arca-agency-transaction-service
+      app: awsprime
   replicas: 1
   template: # template for the pods
     metadata:
       labels:
-        app: arca-agency-transaction-service
+        app: awsprime
     spec:
       containers:
-      - name: arca-agency-transaction-service
+      - name: awsprime
         image: ${REPOSITORY_TAG}
         resources:
           requests:
              memory: 100Mi
              cpu: 0.25
-
-#         env:
-#         - name: SPRING_PROFILES_ACTIVE
-#           value: production-microservice
+duction-microservice
         imagePullPolicy: Always
-#         readinessProbe:
-#           httpGet:
-#             path: /healthz
-#             port: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: arca-agency-transaction-service-svc
-  namespace: agency-banking-staging
+  name: awsprime-svc
+  namespace: cons-deploy
 
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
+ 
   selector:
-    app: arca-agency-transaction-service
+    app: awsprime
 
   ports:
     - name: http
       port: 80
+      nodePort: 30000
 
-  type: ClusterIP
+  type: NodePort
