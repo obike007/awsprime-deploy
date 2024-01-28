@@ -41,5 +41,5 @@ pipeline {
 //         sh 'docker rmi -f $(docker images -qa)'
 //       }
 //     }
-//   }
-// }
+   }
+ }
