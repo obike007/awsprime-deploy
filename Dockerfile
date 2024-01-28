@@ -2,7 +2,7 @@ FROM ubuntu
 WORKDIR /var/www/html
 
 RUN apt update && apt install apache2 systemd -y
-RUN systemctl enable apache2 && systemctl restart apache2
+#RUN systemctl enable apache2 && systemctl restart apache2
 
 COPY index.html style.css /var/www/html/
 
