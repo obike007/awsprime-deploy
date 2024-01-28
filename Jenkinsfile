@@ -40,10 +40,10 @@ pipeline {
             }
         }
 
-    stage ('Delete Images') {
-      steps {
-        sh 'docker rmi -f $(docker images -qa)'
-      }
-    }
-  }
-}
+//     stage ('Delete Images') {
+//       steps {
+//         sh 'docker rmi -f $(docker images -qa)'
+//       }
+//     }
+//   }
+// }
