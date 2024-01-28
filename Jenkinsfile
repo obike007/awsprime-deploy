@@ -21,22 +21,18 @@ pipeline {
        }
     }
 
-    stage("Install kubectl"){
+    stage ("Install kubectl"){
             steps {
-                sh """
-                    curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-                    chmod +x ./kubectl
-                    ./kubectl version --client
-                """
+                sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl'
+                sh 'chmod +x ./kubectl'
+                sh './kubectl version --client'
             }
         }
         
     stage ('Deploy to Cluster') {
             steps {
-                sh ''
-                     aws eks update-kubeconfig --region eu-west-1 --name ekscluster
-                     envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f -
-                   ''
+                sh 'aws eks update-kubeconfig --region eu-west-1 --name ekscluster'
+                sh 'envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f -'
             }
     }
 
